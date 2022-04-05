@@ -23,6 +23,15 @@ StateMachine::StateMachine(DisplayActions *displayActions, int displayActiveSec,
 StateMachine::~StateMachine(){}
 
 
+void StateMachine::setDefaultLightTimeout(int defaultValue){
+    if (!timerOn && lightTimerSecLeft == lightTimerSecLeftDefault){
+        lightTimerSecLeft = defaultValue;
+        lightTimeChanged = true;
+    }
+    lightTimerSecLeftDefault = defaultValue;
+}
+
+
 bool StateMachine::checkAction(){
     if (!displayOn){
         turnOnDisplay();
@@ -87,6 +96,8 @@ void StateMachine::incLedTimerSec(){
         lightTimerSecLeft += TIME_DIFF_SEC;
         if (lightTimerSecLeft > MAX_SEC) lightTimerSecLeft = MAX_SEC;
         lightTimeChanged = true;
+    }else{
+        lightTimerSecLeft = TIME_DIFF_SEC;
     }
 };
 
@@ -95,6 +106,8 @@ void StateMachine::decLightTimerSec(){
     if (lightTimerSecLeft > 0){
         lightTimerSecLeft -= TIME_DIFF_SEC;
         lightTimeChanged = true;
+    }else{
+        lightTimerSecLeft = lightTimerSecLeftDefault;
     }
 };
 

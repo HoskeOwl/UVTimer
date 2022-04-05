@@ -39,6 +39,8 @@ public:
     void incLedTimerSec();
     void decLightTimerSec();
     void resetLightTimerSec();
+    void setDefaultLightTimeout(int);
+    int getLightTimerSecLeft(){return lightTimerSecLeft;};
 
     void tickDisplayTimerSec();
     void resetDisplayTimerSec();
